@@ -61,7 +61,7 @@ function retrieve_posts() {
   navigator.geolocation.getCurrentPosition(function(geoloc) {
     var lat = parseFloat(geoloc.coords.latitude);
     var lng = parseFloat(geoloc.coords.longitude);
-    $.get("http://bounce9833.azurewebsites.net/api/myposts", {user_id: document.cookies}, function(new_posts) {
+    $.get("http://bounce9833.azurewebsites.net/api/my_posts", {user_id: document.cookies}, function(new_posts) {
       posts = posts.concat(new_posts); 
       post_count = posts.length;
       for(var i = 0; i < new_posts.length; i++) {
