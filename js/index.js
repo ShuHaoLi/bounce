@@ -48,7 +48,8 @@ function retrieve_map() {
       var marker = new google.maps.Marker({
         position: latlng,
         map: map,
-      });
+        animation: google.maps.Animation.DROP
+  });
     }
   });
 }
