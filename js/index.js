@@ -125,7 +125,7 @@ function new_post(text, uid, lat, lng) {
 function add_comment() {
   var text = document.getElementById(posts[post_index]._id + 'comment').value;
   $.post("http://bounce9833.azurewebsites.net/api/comment", {post_id: posts[post_index]._id, user_id: document.cookie, text: text}, function(message) {
-      if(message.lower().indexOf("posted") > -1) {
+      if(message.toLowerCase().indexOf("posted") > -1) {
         toastr.success(message); 
       } else {
         toastr.error("Oops. Something went wrong...");
@@ -140,7 +140,7 @@ function bounce() {
     var lat = parseFloat(geoloc.coords.latitude);
     var lng = parseFloat(geoloc.coords.longitude);
     $.post("http://bounce9833.azurewebsites.net/api/bounce", {lat: lat, lng: lng, user_id: document.cookie, post_id: posts[post_index]._id}, function(message) {
-      if(message.lower().indexOf("bounced") > -1) {
+      if(message.toLowerCase().indexOf("bounced") > -1) {
         toastr.success(message); 
       } else {
         toastr.error("Oops. Something went wrong...");
