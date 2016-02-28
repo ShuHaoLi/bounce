@@ -28,6 +28,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
 </head>
 
 <body>
@@ -76,7 +77,11 @@
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                             <div class="item active">
-                                <img class="img-responsive img-full" src="img/1.jpg" alt="">
+                                <div class="flex-container">
+                                    <div class="small-item" id="left">Small</div>
+                                    <div class="large-item" id="middle">Large</div>
+                                    <div class="small-item" id="right">Small</div>
+                                </div>
                             </div>
                             <div class="item">
                                 <img class="img-responsive img-full" src="img/1.jpg" alt="">
@@ -87,10 +92,10 @@
                         </div>
 
                         <!-- Controls -->
-                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev" style="margin-left: -15%;">
                             <span class="icon-prev"></span>
                         </a>
-                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next" style="margin-right: -15%;">
                             <span class="icon-next"></span>
                         </a>
                     </div>
@@ -135,6 +140,27 @@
         interval: 5000 //changes the speed
     })
     </script>
+
+
+<script>
+$(document).ready(function(){
+    $("#left").click(function(){
+        $(this).css("flex-grow",2);
+        $(this).parent().children("#middle").css("flex-grow",1);
+        $(this).parent().children("#right").css("flex-grow",1);
+    });
+    $("#middle").click(function(){
+        $(this).css("flex-grow",2);
+        $(this).parent().children("#left").css("flex-grow",1);
+        $(this).parent().children("#right").css("flex-grow",1);
+    });
+    $("#right").click(function(){
+        $(this).css("flex-grow",2);
+        $(this).parent().children("#left").css("flex-grow",1);
+        $(this).parent().children("#middle").css("flex-grow",1);
+    });
+});
+</script>
 
 </body>
 

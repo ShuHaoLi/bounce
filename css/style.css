@@ -189,3 +189,21 @@ footer p {
     height: 300px;
     width: 100%;
 }
+
+.flex-container {
+    display: flex;
+}
+
+.small-item {
+    flex-grow: 1;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+}
+
+.large-item {
+    flex-grow: 2;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+}
