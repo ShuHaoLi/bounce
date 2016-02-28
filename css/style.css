@@ -220,3 +220,9 @@ footer p {
     font-size: 48px;
     padding: 15px;
 }
+
+.text-post {
+    width: 100%;
+    min-height: 300px;
+    font-size: 32px;
+}
