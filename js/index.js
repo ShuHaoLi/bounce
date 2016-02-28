@@ -120,7 +120,7 @@ function new_text_post() {
 function new_post(text, uid, lat, lng) {
   $.post("http://bounce9833.azurewebsites.net/api/post", {text: text, user_id: uid, lat: lat, lng: lng}, function(message) {
       console.log(message);
-      if(message.message.toLowerCase().indexOf("posted") > -1) {
+      if(message.message.toLowerCase().indexOf("created") > -1) {
         toastr.success(message.message); 
       } else {
         toastr.error("Oops. Something went wrong...");
