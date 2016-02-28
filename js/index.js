@@ -149,5 +149,6 @@ function set_latlng() {
 }
 
 $(document).ready(function() {
+  setCookie();
   retrieve_posts();
 })
