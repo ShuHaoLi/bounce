@@ -1,11 +1,13 @@
-var posts = ["SAME", "SAME1", "SAME2"];
+var posts = ["s"];
 var post_index = 0;
 var post_count = 0;
 var map;  // Google map object (global variable)
 
 function left_card() {
-  post_index = (post_index + post_count - 1) % post_count;  
+  post_index = (post_index + post_count - 1) % post_count;
   console.log(post_index);
+  retrieve_comments();
+  retrieve_map();
 }
 
 function right_card() {
@@ -14,6 +16,8 @@ function right_card() {
   if(post_index == post_count - 3) {
     retrieve_posts();
   }
+  retrieve_comments();
+  retrieve_map();
 }
 
 function retrieve_map() {
@@ -42,7 +46,12 @@ function retrieve_map() {
 function retrieve_comments() {
   $.get("http://bounce9833.azurewebsites.net/api/comment", {post_id: posts[post_index]._id}, function(comments) {
     console.log($('#' + posts[post_index]._id + 'left'));
-    $('#' + posts[post_index]._id + 'left').html(comments);
+    var commentString = "";
+    for (var i=0; i<comments.length; i++) {
+      commentString += '<hr>' + comments[i].text + '<br>';
+    }
+    commentString += "<hr><input type='text' id='" + posts[post_index]._id + "comment' placeholder='Comment'></input> <a class='btn btn-primary' onclick='add_comment()'>Send</a>";
+    $('#' + posts[post_index]._id + 'left').html(commentString);
     return comments;
   });
 }
@@ -55,33 +64,14 @@ function retrieve_posts() {
     for(var i = 0; i < new_posts.length; i++) {
       $("#card-view").append("<div class='item'>" +
                                "<div class='flex-container'>" +
-                                  "<div id='" + new_posts[i]._id + "left' class='small-item left'>Left</div>" +
-                                  "<div class='large-item middle'>" + new_posts[i].text + "</div>" +
-                                  "<div id='" + new_posts[i]._id + "right' class='small-item right' style='height: 100px;'>Right</div>" +
+                                "<div class='flex-container large-item flex-vertical'>" +
+                                  "<div class='small-item card-left main-text' id='"+ new_posts[i]._id + "text'>" + new_posts[i].text + "</div>" +
+                                  "<div class='small-item card-left' id='"+ new_posts[i]._id + "left'>Left</div>" +
                                 "</div>" +
-                              "</div>");
-
+                                "<div id='" + new_posts[i]._id + "right' class='small-item card-right'>Right</div>" +
+                              "</div>" +
+                            "</div>");
     }
-
-    set_click_events();
-  });
-}
-
-function set_click_events() {
-  $(".left").click(function(){
-    $(this).css("flex-grow",2);
-    $(this).parent().children(".middle").css("flex-grow",1);
-    $(this).parent().children(".right").css("flex-grow",1);
-  });
-  $(".middle").click(function(){
-    $(this).css("flex-grow",2);
-    $(this).parent().children(".left").css("flex-grow",1);
-    $(this).parent().children(".right").css("flex-grow",1);
-  });
-  $(".right").click(function(){
-    $(this).css("flex-grow",2);
-    $(this).parent().children(".left").css("flex-grow",1);
-    $(this).parent().children(".middle").css("flex-grow",1);
   });
 }
 
@@ -94,6 +84,18 @@ function new_post(text, uid, lat, lng) {
   $.post("http://bounce9833.azurewebsites.net/api/post", {text: text, user_id: uid, lat: lat, lng: lng}, function(message) {
     console.log(message);
   });
+}
+
+function add_comment() {
+  var text = document.getElementById(posts[post_index]._id + 'comment').value;
+  $.post("http://bounce9833.azurewebsites.net/api/comment", {post_id: posts[post_index]._id, user_id: document.cookie, text: text}, function(message) {
+    console.log(message);
+  })
+  retrieve_comments();
+}
+
+function bounce() {
+  $.post("http://bounce9833.azurewebsites.net/api/bounce", {})
 }
 
 $(document).ready(function() {

@@ -76,6 +76,10 @@ hr {
     padding: 30px 15px;
     background: #fff;
     background: rgba(255,255,255,0.9);
+    min-height: 600px;
+    border-style: solid;
+    border-width: 1px;
+    margin-top: 40px;
 }
 
 .intro-text {
@@ -194,16 +198,25 @@ footer p {
     display: flex;
 }
 
-.small-item {
-    flex-grow: 1;
-    border-width: 1px;
-    border-color: black;
-    border-style: solid;
+.flex-vertical {
+    flex-direction: column;
 }
 
-.large-item {
-    flex-grow: 2;
-    border-width: 1px;
-    border-color: black;
-    border-style: solid;
+.small-item {
+    flex-grow: 1;
+    min-height: 200px;
+}
+
+.card-left {
+    word-wrap:break-word;
+    min-width:500px;
+}
+
+.card-right {
+    min-width:400px;
+}
+
+.main-text {
+    font-size: 48px;
+    padding: 15px;
 }
