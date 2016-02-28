@@ -96,7 +96,7 @@ function retrieve_posts() {
   setTimeout(function() {
     retrieve_comments();
     retrieve_map();
-  }, 5000);
+  }, 2000);
 }
 
 function new_text_post() {
