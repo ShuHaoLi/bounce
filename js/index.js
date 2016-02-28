@@ -93,6 +93,8 @@ function retrieve_posts() {
       }
     });
   });
+  retrieve_comments();
+  retrieve_map();
 }
 
 function new_text_post() {
@@ -138,6 +140,4 @@ function set_latlng() {
 
 $(document).ready(function() {
   retrieve_posts();
-  retrieve_comments();
-  retrieve_map();
 })
