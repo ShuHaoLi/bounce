@@ -81,9 +81,9 @@ function retrieve_posts() {
                                  "<div class='flex-container'>" +
                                   "<div class='flex-container large-item flex-vertical'>" +
                                     "<div class='small-item card-left main-text' id='"+ new_posts[i]._id + "text'>" + new_posts[i].text + "</div>" +
-                                    "<div class='small-item card-left' id='"+ new_posts[i]._id + "left'>Left</div>" +
+                                    "<div class='small-item card-left' id='"+ new_posts[i]._id + "left'>Loading..</div>" +
                                   "</div>" +
-                                  "<div id='" + new_posts[i]._id + "right' class='small-item card-right'>Right</div>" +
+                                  "<div id='" + new_posts[i]._id + "right' class='small-item card-right'>Loading..</div>" +
                                 "</div>" +
                               "</div>");
           } else { 
@@ -91,9 +91,9 @@ function retrieve_posts() {
                                  "<div class='flex-container'>" +
                                   "<div class='flex-container large-item flex-vertical'>" +
                                     "<div class='small-item card-left main-text' id='"+ new_posts[i]._id + "text'>" + new_posts[i].text + "</div>" +
-                                    "<div class='small-item card-left' id='"+ new_posts[i]._id + "left'>Left</div>" +
+                                    "<div class='small-item card-left' id='"+ new_posts[i]._id + "left'>Loading..</div>" +
                                   "</div>" +
-                                  "<div id='" + new_posts[i]._id + "right' class='small-item card-right'>Right</div>" +
+                                  "<div id='" + new_posts[i]._id + "right' class='small-item card-right'>Loading..</div>" +
                                 "</div>" +
                               "</div>");
           }
@@ -101,6 +101,10 @@ function retrieve_posts() {
       }
     });
   });
+  setTimeout(function() {
+    retrieve_comments();
+    retrieve_map();
+  }, 2000);
 }
 
 function new_text_post() {
@@ -146,6 +150,4 @@ function set_latlng() {
 
 $(document).ready(function() {
   retrieve_posts();
-  retrieve_comments();
-  retrieve_map();
 })
