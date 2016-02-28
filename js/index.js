@@ -138,7 +138,7 @@ function bounce() {
     $.post("http://bounce9833.azurewebsites.net/api/bounce", {lat: lat, lng: lng, user_id: document.cookie, post_id: posts[post_index]._id}, function(message) {
       console.log(message);
     })
-    retrieve_map;
+    retrieve_map();
   });
 }
 
