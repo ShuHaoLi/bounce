@@ -119,6 +119,16 @@
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
+    <script>
+    $("#" + posts[post_index]._id + "comment").keypress(function (e) {
+        if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+            $("#" + posts[post_index]._id + "send").click();
+            return false;
+        } else {
+            return true;
+        }
+    });</script>
+
     <!-- Bootstrap Core JavaScript -->
     <!--script src="js/bootstrap.min.js"></script-->
     <script src="js/bootstrap.js"></script>

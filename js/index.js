@@ -60,7 +60,7 @@ function retrieve_comments() {
     for (var i=0; i<comments.length; i++) {
       commentString += '<hr>' + comments[i].text + '<br>';
     }
-    commentString += "<hr><input type='text' id='" + posts[post_index]._id + "comment' placeholder='Comment'></input> <a class='btn btn-primary' onclick='add_comment()'>Send</a>";
+    commentString += "<hr><input type='text' id='" + posts[post_index]._id + "comment' placeholder='Comment'></input> <a class='btn btn-primary' id='" + posts[post_index]._id + "send' onclick='add_comment()'>Send</a>";
     $('#' + posts[post_index]._id + 'left').html(commentString);
     return comments;
   });
