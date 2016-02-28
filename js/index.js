@@ -15,18 +15,27 @@ function right_card() {
   }
 }
 
+function retrieve_comments() {
+  $.get("http://bounce9833.azurewebsites.net/api/comment", {post_id: posts[post_index]._id}, function(comments) {
+    console.log(comments);
+    return comments;
+  });
+}
+
 function retrieve_posts() {
   $.get("http://bounce9833.azurewebsites.net/api/post", {lat: 1, lng: 2, offset: post_count}, function(new_posts) {
+    console.log(new_posts);
     posts = posts.concat(new_posts); 
     post_count = posts.length;
     for(var i = 0; i < new_posts.length; i++) {
-      $("#card-view").append("<div class='item'>" + 
+      $("#card-view").append("<div class='item'>" +
                                "<div class='flex-container'>" +
                                   "<div class='small-item left'>Left</div>" +
                                   "<div class='large-item middle'>" + new_posts[i].text + "</div>" +
-                                  "<div class='small-item right'>Right</div>" +
+                                  "<div class='small-item right'>" + "Right" + "</div>" +
                                 "</div>" +
                               "</div>");
+
     }
 
     set_click_events();
