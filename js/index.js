@@ -1,6 +1,6 @@
-var posts = ["s"];
+var posts = [];
 var post_index = 0;
-var post_count = 1;
+var post_count = 0;
 var map;  // Google map object (global variable)
 
 var lat;
@@ -64,8 +64,12 @@ function retrieve_posts() {
     $.get("http://bounce9833.azurewebsites.net/api/post", {lat: lat, lng: lng, offset: post_count}, function(new_posts) {
       posts = posts.concat(new_posts); 
       post_count = posts.length;
-      for(var i = 0; i < new_posts.length; i++) {
-        $("#card-view").append("<div class='item'>" +
+      if (posts.length == 0) {
+        $("#card-view").append("<div><h1>No Posts</h1></div>");
+      } else {
+        for(var i = 0; i < new_posts.length; i++) {
+          if (i == 0) {
+            $("#card-view").append("<div class='item active'>" +
                                  "<div class='flex-container'>" +
                                   "<div class='flex-container large-item flex-vertical'>" +
                                     "<div class='small-item card-left main-text' id='"+ new_posts[i]._id + "text'>" + new_posts[i].text + "</div>" +
@@ -74,6 +78,18 @@ function retrieve_posts() {
                                   "<div id='" + new_posts[i]._id + "right' class='small-item card-right'>Right</div>" +
                                 "</div>" +
                               "</div>");
+          } else { 
+            $("#card-view").append("<div class='item'>" +
+                                 "<div class='flex-container'>" +
+                                  "<div class='flex-container large-item flex-vertical'>" +
+                                    "<div class='small-item card-left main-text' id='"+ new_posts[i]._id + "text'>" + new_posts[i].text + "</div>" +
+                                    "<div class='small-item card-left' id='"+ new_posts[i]._id + "left'>Left</div>" +
+                                  "</div>" +
+                                  "<div id='" + new_posts[i]._id + "right' class='small-item card-right'>Right</div>" +
+                                "</div>" +
+                              "</div>");
+          }
+        }
       }
     });
   });
@@ -122,4 +138,6 @@ function set_latlng() {
 
 $(document).ready(function() {
   retrieve_posts();
+  retrieve_comments();
+  retrieve_map();
 })
