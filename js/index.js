@@ -23,7 +23,9 @@ function right_card() {
 
 function retrieve_map() {
   $.get("http://bounce9833.azurewebsites.net/api/post_bounces", {post_id: posts[post_index]._id}, function(bounces) {
-
+    console.log(bounces);
+    console.log(bounces[0]);
+    console.log(bounces[0].loc);
     // Create a Google coordinate object for where to center the map
     var latlngDC = new google.maps.LatLng( bounces[0].loc[0], bounces[0].loc[1] ); // Coordinates of Washington, DC (area centroid)
     
