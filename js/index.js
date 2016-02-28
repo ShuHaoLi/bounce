@@ -113,8 +113,8 @@ function new_text_post() {
     var lat = parseFloat(geoloc.coords.latitude);
     var lng = parseFloat(geoloc.coords.longitude);
     var text = document.getElementById('text').value;
+    $("#text").empty();
     new_post(text, document.cookie, lat, lng);
-    $("#text").clear();
   });
 }
 
