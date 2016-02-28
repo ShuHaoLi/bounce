@@ -87,7 +87,7 @@ function set_click_events() {
 
 function new_text_post() {
   var text = document.getElementById('text').value;
-  new_post(text, "41sacxa", 1, 2); // Hard coded
+  new_post(text, document.cookie, 1, 2); // Hard coded
 }
 
 function new_post(text, uid, lat, lng) {
