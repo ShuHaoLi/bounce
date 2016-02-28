@@ -74,55 +74,12 @@
     <div class="container">
         <div class="row">
             <div class="box">
-                <div class="col-lg-12 text-center">
-                    <div id="carousel-example-generic" class="carousel slide">
-
-                        <!-- Wrapper for slides -->
-                        <div id="card-view" class="carousel-inner">
-                            <div class="item active">
-                                <div class="flex-container">
-                                    <div class="small-item left">Left</div>
-                                    <div class="large-item middle">Middle</div>
-                                    <div class="small-item right">Right</div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="flex-container">
-                                    <div class="small-item left">Left</div>
-                                    <div class="large-item middle">Middle</div>
-                                    <div class="small-item right">Right</div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="flex-container">
-                                    <div class="small-item left">Left</div>
-                                    <div class="large-item middle">Middle</div>
-                                    <div class="small-item right">Right</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Controls -->
-                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev" style="margin-left: -15%;" onclick="left_card()">
-                            <span class="icon-prev"></span>
-                        </a>
-                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next" style="margin-right: -15%;" onclick="right_card()">
-                            <span class="icon-next"></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="box">
                 <div class="col-lg-12">
-                    <hr>
-                    <h2 class="intro-text text-center">Username here</h2>
-                    <hr>
-                    <img class="img-responsive img-border img-left small-img" src="img/2.jpg" alt="">
-                    <hr class="visible-xs">
-                    <p>Text here.</p>
+                    <form>
+                        Text to bounce:<br>
+                        <input type="text" id="text"><br>
+                        <button class="btn btn-primary" onclick="new_text_post()">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
