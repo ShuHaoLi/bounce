@@ -145,32 +145,6 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-    <!-- Script to Activate the Carousel -->
-    <script>
-    $('.carousel').carousel({
-        interval: 5000 //changes the speed
-    })
-    </script>
-
-<script>
-$(document).ready(function(){
-    $(".left").click(function(){
-        $(this).css("flex-grow",2);
-        $(this).parent().children(".middle").css("flex-grow",1);
-        $(this).parent().children(".right").css("flex-grow",1);
-    });
-    $(".middle").click(function(){
-        $(this).css("flex-grow",2);
-        $(this).parent().children(".left").css("flex-grow",1);
-        $(this).parent().children(".right").css("flex-grow",1);
-    });
-    $(".right").click(function(){
-        $(this).css("flex-grow",2);
-        $(this).parent().children(".left").css("flex-grow",1);
-        $(this).parent().children(".middle").css("flex-grow",1);
-    });
-});
-</script>
     <!-- UI functionality -->
     <script src="js/index.js"></script> 
 
