@@ -23,7 +23,6 @@ function right_card() {
 
 function retrieve_map() {
   $.get("http://bounce9833.azurewebsites.net/api/post_bounces", {post_id: posts[post_index]._id}, function(bounces) {
-    console.log("sss" + bounces[0]);
 
     // Create a Google coordinate object for where to center the map
     var latlngDC = new google.maps.LatLng( bounces[0].loc[0], bounces[0].loc[1] ); // Coordinates of Washington, DC (area centroid)
@@ -45,8 +44,6 @@ function retrieve_map() {
 }
 
 function retrieve_comments() {
-  console.log(post_index);
-  console.log(posts[post_index]);
   $.get("http://bounce9833.azurewebsites.net/api/comment", {post_id: posts[post_index]._id}, function(comments) {
     var commentString = "";
     for (var i=0; i<comments.length; i++) {
@@ -81,23 +78,15 @@ function retrieve_posts() {
 }
 
 function new_text_post() {
-  console.log('new post man');
   navigator.geolocation.getCurrentPosition(function(geoloc) {
-    console.log('INSIDE GEO');
     var lat = parseInt(geoloc.coords.latitude);
     var lng = parseInt(geoloc.coords.longitude);
     var text = document.getElementById('text').value;
     new_post(text, document.cookie, lat, lng);
-  }, function(err) {
-    console.log(err);
-  },{timeout:10000});
+  });
 }
 
 function new_post(text, uid, lat, lng) {
-  console.log(lat);
-  console.log(lng);
-  console.log(text);
-  console.log(uid);
   $.post("http://bounce9833.azurewebsites.net/api/post", {text: text, user_id: uid, lat: lat, lng: lng}, function(message) {
     console.log(message);
   });
@@ -115,7 +104,6 @@ function bounce() {
   navigator.geolocation.getCurrentPosition(function(geoloc) {
     var lat = parseInt(geoloc.coords.latitude);
     var lng = parseInt(geoloc.coords.longitude);
-    var text = document.getElementById('text').value;
     $.post("http://bounce9833.azurewebsites.net/api/bounce", {lat: lat, lng: lng, user_id: document.cookie, post_id: posts[post_index]._id}, function(message) {
       console.log(message);
     })
