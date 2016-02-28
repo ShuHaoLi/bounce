@@ -1,6 +1,7 @@
 var posts = ["SAME", "SAME1", "SAME2"];
 var post_index = 0;
 var post_count = 0;
+var map;  // Google map object (global variable)
 
 function left_card() {
   post_index = (post_index + post_count - 1) % post_count;  
@@ -15,9 +16,24 @@ function right_card() {
   }
 }
 
+function retrieve_map() {
+  $.get("http://bounce9833.azurewebsites.net/api/post_bounces", {post_id: posts[post_index]._id}, function(bounces) {
+    // Create a Google coordinate object for where to center the map
+    var latlngDC = new google.maps.LatLng( 38.8951, -77.0367 ); // Coordinates of Washington, DC (area centroid)
+    
+    // Map options for how to display the Google map
+    var mapOptions = { zoom: 12, center: latlngDC  };
+    
+    // Show the Google map in the div with the attribute id 'map-canvas'.
+    map = new google.maps.Map(document.getElementById(posts[post_index]._id + 'right'), mapOptions);
+  });
+}
+
 function retrieve_comments() {
   $.get("http://bounce9833.azurewebsites.net/api/comment", {post_id: posts[post_index]._id}, function(comments) {
     console.log(comments);
+    console.log($('#' + posts[post_index]._id + 'left'));
+    $('#' + posts[post_index]._id + 'left').html(comments);
     return comments;
   });
 }
@@ -30,9 +46,9 @@ function retrieve_posts() {
     for(var i = 0; i < new_posts.length; i++) {
       $("#card-view").append("<div class='item'>" +
                                "<div class='flex-container'>" +
-                                  "<div class='small-item left'>Left</div>" +
+                                  "<div id='" + new_posts[i]._id + "left' class='small-item left'>Left</div>" +
                                   "<div class='large-item middle'>" + new_posts[i].text + "</div>" +
-                                  "<div class='small-item right'>" + "Right" + "</div>" +
+                                  "<div id='" + new_posts[i]._id + "right' class='small-item right'>Right</div>" +
                                 "</div>" +
                               "</div>");
 
