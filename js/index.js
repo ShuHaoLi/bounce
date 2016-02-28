@@ -27,8 +27,8 @@ function retrieve_map() {
     console.log(bounces[0]);
     console.log(bounces[0].loc);
     // Create a Google coordinate object for where to center the map
-    var latlngCenter = new google.maps.LatLng({lng: -123.1207, lat: 49.2827 }); // Coordinates of Washington, DC (area centroid)
-    
+    var latlngCenter = new google.maps.LatLng({lng: bounces[0].loc[0], lat: bounces[0].loc[1]} ); // Coordinates of Washington, DC (area centroid)
+
     // Map options for how to display the Google map
     var mapOptions = { zoom: 12, center: latlngCenter  };
 
