@@ -1,7 +1,10 @@
 var posts = ["SAME", "SAME1", "SAME2"];
 var post_index = 0;
-var post_count = 0;
+var post_count = 3;
 var map;  // Google map object (global variable)
+
+var lat;
+var lng;
 
 function left_card() {
   post_index = (post_index + post_count - 1) % post_count;  
@@ -48,22 +51,25 @@ function retrieve_comments() {
 }
 
 function retrieve_posts() {
-  $.get("http://bounce9833.azurewebsites.net/api/post", {lat: 1, lng: 2, offset: post_count}, function(new_posts) {
-    console.log(new_posts);
-    posts = posts.concat(new_posts); 
-    post_count = posts.length;
-    for(var i = 0; i < new_posts.length; i++) {
-      $("#card-view").append("<div class='item'>" +
-                               "<div class='flex-container'>" +
-                                  "<div id='" + new_posts[i]._id + "left' class='small-item left'>Left</div>" +
-                                  "<div class='large-item middle'>" + new_posts[i].text + "</div>" +
-                                  "<div id='" + new_posts[i]._id + "right' class='small-item right' style='height: 100px;'>Right</div>" +
-                                "</div>" +
-                              "</div>");
+  navigator.geolocation.getCurrentPosition(function(geoloc) {
+    var lat = Integer.parseInt(geoloc.coords.latitude);
+    var lng = Integer.parseInt(geoloc.coords.longitude);
+    $.get("http://bounce9833.azurewebsites.net/api/post", {lat: lat, lng: lng, offset: post_count}, function(new_posts) {
+      console.log(new_posts);
+      posts = posts.concat(new_posts); 
+      post_count = posts.length;
+      for(var i = 0; i < new_posts.length; i++) {
+        $("#card-view").append("<div class='item'>" +
+                                 "<div class='flex-container'>" +
+                                    "<div id='" + new_posts[i]._id + "left' class='small-item left'>Left</div>" +
+                                    "<div class='large-item middle'>" + new_posts[i].text + "</div>" +
+                                    "<div id='" + new_posts[i]._id + "right' class='small-item right' style='height: 100px;'>Right</div>" +
+                                  "</div>" +
+                                "</div>");
+      }
 
-    }
-
-    set_click_events();
+      set_click_events();
+    });
   });
 }
 
@@ -86,16 +92,34 @@ function set_click_events() {
 }
 
 function new_text_post() {
-  var text = document.getElementById('text').value;
-  new_post(text, document.cookie, 1, 2); // Hard coded
+  console.log("test");
+  navigator.geolocation.getCurrentPosition(function(geoloc) {
+    console.log("test");
+    var lat = Integer.parseInt(geoloc.coords.latitude);
+    var lng = Integer.parseInt(geoloc.coords.longitude);
+    var text = document.getElementById('text').value;
+    new_post(text, document.cookie, lat, lng); // Hard coded
+  });
 }
 
 function new_post(text, uid, lat, lng) {
+  console.log(text);
+  console.log(uid);
+  console.log(lat);
+  console.log(lng);
   $.post("http://bounce9833.azurewebsites.net/api/post", {text: text, user_id: uid, lat: lat, lng: lng}, function(message) {
     console.log(message);
   });
 }
 
+function set_latlng() {
+  navigator.geolocation.getCurrentPosition(function(geoloc) {
+    lat = geoloc.coords.latitude;
+    lng = geoloc.coords.longitude;
+  });
+}
+
 $(document).ready(function() {
+  set_click_events();
   retrieve_posts();
 })
