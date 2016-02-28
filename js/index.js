@@ -59,8 +59,8 @@ function retrieve_comments() {
 
 function retrieve_posts() {
   navigator.geolocation.getCurrentPosition(function(geoloc) {
-    var lat = parseInt(geoloc.coords.latitude);
-    var lng = parseInt(geoloc.coords.longitude);
+    var lat = parseFloat(geoloc.coords.latitude);
+    var lng = parseFloat(geoloc.coords.longitude);
     $.get("http://bounce9833.azurewebsites.net/api/post", {lat: lat, lng: lng, offset: post_count}, function(new_posts) {
       posts = posts.concat(new_posts); 
       post_count = posts.length;
@@ -81,8 +81,8 @@ function retrieve_posts() {
 
 function new_text_post() {
   navigator.geolocation.getCurrentPosition(function(geoloc) {
-    var lat = parseInt(geoloc.coords.latitude);
-    var lng = parseInt(geoloc.coords.longitude);
+    var lat = parseFloat(geoloc.coords.latitude);
+    var lng = parseFloat(geoloc.coords.longitude);
     var text = document.getElementById('text').value;
     new_post(text, document.cookie, lat, lng);
   });
@@ -104,8 +104,8 @@ function add_comment() {
 
 function bounce() {
   navigator.geolocation.getCurrentPosition(function(geoloc) {
-    var lat = parseInt(geoloc.coords.latitude);
-    var lng = parseInt(geoloc.coords.longitude);
+    var lat = parseFloat(geoloc.coords.latitude);
+    var lng = parseFloat(geoloc.coords.longitude);
     $.post("http://bounce9833.azurewebsites.net/api/bounce", {lat: lat, lng: lng, user_id: document.cookie, post_id: posts[post_index]._id}, function(message) {
       console.log(message);
     })
