@@ -140,8 +140,8 @@ function bounce() {
     var lat = parseFloat(geoloc.coords.latitude);
     var lng = parseFloat(geoloc.coords.longitude);
     $.post("http://bounce9833.azurewebsites.net/api/bounce", {lat: lat, lng: lng, user_id: document.cookie, post_id: posts[post_index]._id}, function(message) {
-      if(message.toLowerCase().indexOf("bounced") > -1) {
-        toastr.success(message); 
+      if(message.message.toLowerCase().indexOf("bounced") > -1) {
+        toastr.success(message.message); 
       } else {
         toastr.error("Oops. Something went wrong...");
       }
