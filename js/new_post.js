@@ -107,6 +107,27 @@ function retrieve_posts() {
   }, 2000);
 }
 
+function new_text_post() {
+  navigator.geolocation.getCurrentPosition(function(geoloc) {
+    var lat = parseFloat(geoloc.coords.latitude);
+    var lng = parseFloat(geoloc.coords.longitude);
+    var text = document.getElementById('text').value;
+    $('#postText').val("");
+    new_post(text, document.cookie, lat, lng);
+  });
+}
+
+function new_post(text, uid, lat, lng) {
+  $.post("http://bounce9833.azurewebsites.net/api/post", {text: text, user_id: uid, lat: lat, lng: lng}, function(message) {
+      console.log(message);
+      if(message.message.toLowerCase().indexOf("created") > -1) {
+        toastr.success(message.message); 
+      } else {
+        toastr.error("Oops. Something went wrong...");
+      }
+  });
+}
+
 function add_comment() {
   var text = document.getElementById(posts[post_index]._id + 'comment').value;
   $.post("http://bounce9833.azurewebsites.net/api/comment", {post_id: posts[post_index]._id, user_id: document.cookie, text: text}, function(message) {
@@ -137,8 +158,3 @@ function set_latlng() {
   });
 
 }
-
-$(document).ready(function() {
-  setCookie();
-  retrieve_posts();
-})
