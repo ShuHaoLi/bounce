@@ -76,7 +76,7 @@ function retrieve_posts() {
         $("#card-view").append("<div><h1>No Posts</h1></div>");
       } else {
         for(var i = 0; i < new_posts.length; i++) {
-          if (i == 0) {
+          if (i == 0 && post_index == 0) {
             $("#card-view").append("<div class='item active'>" +
                                  "<div class='flex-container'>" +
                                   "<div class='flex-container large-item flex-vertical'>" +
@@ -135,6 +135,7 @@ function add_comment() {
 }
 
 function bounce() {
+  $('#main-container').addClass('animated bounce');
   navigator.geolocation.getCurrentPosition(function(geoloc) {
     var lat = parseFloat(geoloc.coords.latitude);
     var lng = parseFloat(geoloc.coords.longitude);
@@ -145,6 +146,7 @@ function bounce() {
         toastr.error("Oops. Something went wrong...");
       }
     })
+    retrieve_map();
   });
 }
 
