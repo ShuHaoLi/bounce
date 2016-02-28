@@ -93,8 +93,10 @@ function retrieve_posts() {
       }
     });
   });
-  retrieve_comments();
-  retrieve_map();
+  setTimeout(function() {
+    retrieve_comments();
+    retrieve_map();
+  }, 5000);
 }
 
 function new_text_post() {
