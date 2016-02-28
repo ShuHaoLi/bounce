@@ -124,6 +124,7 @@ function add_comment() {
 }
 
 function bounce() {
+  $('#main-container').addClass('animated bounce');
   navigator.geolocation.getCurrentPosition(function(geoloc) {
     var lat = parseFloat(geoloc.coords.latitude);
     var lng = parseFloat(geoloc.coords.longitude);
