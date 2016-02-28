@@ -76,6 +76,17 @@ function set_click_events() {
   });
 }
 
+function new_text_post() {
+  var text = document.getElementById('text').value;
+  new_post(text, "41sacxa", 1, 2); // Hard coded
+}
+
+function new_post(text, uid, lat, lng) {
+  $.post("http://bounce9833.azurewebsites.net/api/post", {text: text, user_id: uid, lat: lat, lng: lng}, function(message) {
+    console.log(message);
+  });
+}
+
 $(document).ready(function() {
   retrieve_posts();
 })
