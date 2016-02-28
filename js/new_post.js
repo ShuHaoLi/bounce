@@ -111,7 +111,7 @@ function new_text_post() {
   navigator.geolocation.getCurrentPosition(function(geoloc) {
     var lat = parseFloat(geoloc.coords.latitude);
     var lng = parseFloat(geoloc.coords.longitude);
-    var text = document.getElementById('text').value;
+    var text = document.getElementById('postText').value;
     $('#postText').val("");
     new_post(text, document.cookie, lat, lng);
   });
