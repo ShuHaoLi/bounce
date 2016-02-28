@@ -34,7 +34,7 @@
 
 <body>
 
-    <div class="brand">Bounce</div>
+    <div class="brand"><a href="index.html"><img src="img/logo.png" style="width:300px;"></a></div>
 
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
@@ -78,7 +78,7 @@
                 <div class="col-lg-12">
                     <form>
                         <div class='main-text text-center'>New Post</div>
-                        <textarea id="text" class="text-post"></textarea><br>
+                        <textarea id="postText" class="text-post"></textarea><br>
                         <br />
                         <div class="text-center">
                         <a class="btn btn-lg btn-primary" id="newPostSubmit" onclick="new_text_post()">Submit</a>
@@ -90,16 +90,6 @@
     </div>
     <!-- /.container -->
 
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
@@ -107,7 +97,7 @@
     <script src="js/bootstrap.min.js"></script>
 
     <!-- UI functionality -->
-    <script src="js/index.js"></script> 
+    <script src="js/new_post.js"></script> 
     <script src="js/toastr.min.js"></script>
 
 </body>
