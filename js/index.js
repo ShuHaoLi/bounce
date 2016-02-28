@@ -6,6 +6,14 @@ var map;  // Google map object (global variable)
 var lat;
 var lng;
 
+function setCookie() {
+    var exdays = 1;
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = "cookie" + "=" + "!!!!" + "; " + expires;
+}
+
 function left_card() {
   post_index = (post_index + post_count - 1) % post_count;
   retrieve_comments();
@@ -141,5 +149,6 @@ function set_latlng() {
 }
 
 $(document).ready(function() {
+  setCookie();
   retrieve_posts();
 })
